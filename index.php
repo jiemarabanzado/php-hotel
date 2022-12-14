@@ -39,6 +39,17 @@
         ],
 
     ];
+    function Filter($element){
+        if(!empty($_GET["parking"])&&!empty($_GET["vote"])){
+                return $element["parking"]==$_GET["parking"] && $element["vote"]>=$_GET["vote"];}
+                elseif(!empty($_GET["parking"])){
+                    if($_GET["parking"]==true){
+                        return $element["parking"];
+                    }else
+                }
+        }
+     
+    
     
 ?>
 
@@ -61,8 +72,8 @@
                 <option value="false">nessun parcheggio</option>
                 <option value="true">con parcheggio</option>
             </select>
-            <label class="me-1"for="voto">Filtra hotel per voto</label>
-            <select  class="me-4" name="voto">
+            <label class="me-1"for="vote">Filtra hotel per voto</label>
+            <select  class="me-4" name="vote">
                 <option selected value="">nessun filtro</option>
                 <option value="1">1 stella</option>
                 <option value="2">2 stelle</option>
@@ -83,7 +94,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach(array_filter($hotels)  as $hotel){?>
+                <?php foreach(array_filter($hotels,"Filter")  as $hotel){?>
                     <tr>
                         <?php foreach($hotel as $key=>$data){
                             if($key=='name'){
