@@ -40,16 +40,29 @@
 
     ];
     function Filter($element){
-        if(!empty($_GET["parking"])&&!empty($_GET["vote"])){
-                return $element["parking"]==$_GET["parking"] && $element["vote"]>=$_GET["vote"];}
-                elseif(!empty($_GET["parking"])){
-                    if($_GET["parking"]==true){
-                        return $element["parking"];
-                    }else
+        if(!empty($_GET["parking"])){
+            if(!empty($_GET["vote"])){
+                if($_GET["parking"]=="true"){
+                    return $element["parking"] && $element["vote"] >= $_GET["vote"];
+                }elseif($_GET["parking"]=="false"){
+                    return !$element["parking"] && $element["vote"] >= $_GET["vote"];
+                }  
+            }else{
+                if($_GET["parking"]==="true"){
+                    return $element["parking"];
+                }else{
+                    return !$element["parking"];
                 }
+            }
+        }elseif(!empty($_GET["vote"])){
+            return $element["vote"] >= $_GET["vote"];
+        }else{
+            return true;
         }
+        
+        
      
-    
+    }
     
 ?>
 
